@@ -1,6 +1,8 @@
 package com.scaler.ECommUserService.service;
 
 import com.scaler.ECommUserService.Exception.InvalidCredentialsException;
+import com.scaler.ECommUserService.Exception.InvalidSessionException;
+import com.scaler.ECommUserService.Exception.UserAlreadyLoggedOut;
 import com.scaler.ECommUserService.Exception.UserNotFoundException;
 import com.scaler.ECommUserService.dto.UserDTO;
 import com.scaler.ECommUserService.mapper.UserMapper;
@@ -11,8 +13,6 @@ import com.scaler.ECommUserService.repository.SessionRepository;
 import com.scaler.ECommUserService.repository.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.MacAlgorithm;
-import org.apache.commons.lang.RandomStringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -91,4 +91,15 @@ public class AuthService {
         return UserMapper.userToUserDTO(user);
     }
 
+    public SessionStatus validate(String token, Long userID){
+        Optional<Session> optionalSession = sessionRepository.findByTokenAndUserId(token, userID);
+        if(optionalSession.isEmpty() || optionalSession.get().getSessionStatus().equals(SessionStatus.ENDED)){
+            throw new InvalidSessionException("Invalid User Session");
+        }
+        return SessionStatus.ACTIVE;
+    }
+
+    //public ResponseEntity<Void> logout(Long userID, String token){
+    //    Optional<Session>
+    //}
 }

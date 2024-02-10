@@ -15,7 +15,7 @@ public class SpringSecurity {
         return new BCryptPasswordEncoder();
     }
 
-    /*@Order(1)
+    @Order(1)
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().disable();
@@ -23,6 +23,6 @@ public class SpringSecurity {
         //httpSecurity.authorizeHttpRequests(authorize-> authorize.requestMatchers("/auth/").permitAll());
         httpSecurity.authorizeHttpRequests(authorize-> authorize.anyRequest().permitAll());
         return httpSecurity.build();
-    }*/
+    }
 }
 //This is the class for normal userid-password based authentication

@@ -42,7 +42,7 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
+    /*@Bean
     @Order(1)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
             throws Exception {
@@ -63,7 +63,7 @@ public class SecurityConfig {
                         .jwt(Customizer.withDefaults()));
 
         return http.build();
-    }
+    }*/
 
     @Bean
     @Order(2)
